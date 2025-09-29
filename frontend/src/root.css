@@ -199,3 +199,9 @@
 	--accent-900: #e2d0fb;
 	--accent-950: #f0e7fd;
 }
+
+/* Defaults */
+html {
+    background-color: var(--background-50);
+    color: var(--text-950)
+}
