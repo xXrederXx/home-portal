@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import '../root.css'
 
 export default function Signup() {
   const [name, setName] = useState("")
@@ -12,10 +11,10 @@ export default function Signup() {
   }
 
   return (
-    <div>
-      <div id="Container">
+    <div className='fill-view flex items-center justify-center'>
+      <div id="Container" className='flex flex-col'>
         <h3>Please Enter your Information</h3>
-        <form>
+        <form className='flex flex-col bg-col-50'>
           <label htmlFor="nameInp">Name</label>
           <input type="text" title='nameInp' id="nameInp" onChange={e => setName(e.target.value)} />
 
