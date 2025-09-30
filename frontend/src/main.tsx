@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import Signup from './user/signup.tsx'
 
-document.documentElement.setAttribute("data-theme", "dark")
+document.documentElement.className += " dark"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
