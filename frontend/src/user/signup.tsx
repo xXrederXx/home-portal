@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CreateUser } from '../util/api'
+import { SaveUserId } from '../util/localStorage'
 
 export default function Signup() {
   const [name, setName] = useState("")
@@ -8,23 +10,11 @@ export default function Signup() {
   const [error, setError] = useState("")
 
   async function OnCreate() {
-
-    if (passwd !== passwdRep) {
-      setError("You need to write the same password twice")
-      return;
+    const res = await CreateUser(name, passwd, passwdRep);
+    setError(res.error)
+    if (res.error !== "") {
+      SaveUserId(res.userId)
     }
-    if (name === "") {
-      setError("No name provided")
-      return;
-    }
-    if (passwd === "") {
-      setError("No password provided")
-      return;
-    }
-    setError("")
-    const data = { username: name, passwd: passwd }
-    const res = await fetch("http://localhost:8000/api/createUser", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-    console.log(await res.json());
   }
 
   return (
