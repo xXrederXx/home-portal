@@ -24,6 +24,13 @@ def add_user(id: int, username: str, passwd_hash: bytes):
     )
 
 
+def get_user_by_cred(username: str, passwd_hash: bytes):
+    cursor.execute(
+        "select id from user where username = ? and passwd = ?;",
+        (username, passwd_hash),
+    )
+    return cursor.fetchone()
+
 def get_user(id: int):
     cursor.execute(f"select * from user where id = {id};")
     return cursor.fetchone()

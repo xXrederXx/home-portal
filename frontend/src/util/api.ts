@@ -19,3 +19,19 @@ export async function CreateUser(name: string, passwd: string, passwdRep: string
     const jsonData = await res.json();
     return { error: "", userId: jsonData["user_id"] }
 }
+
+export async function LoginUser(name: string, passwd: string): Promise<{ error: string, userId: number }> {
+    if (name === "") {
+        return { error: "No name provided", userId: 0 };
+    }
+    if (passwd === "") {
+        return { error: "No password provided", userId: 0 };
+    }
+    const data = { username: name, passwd: passwd }
+    const res = await fetch(apiUrl + "loginUser", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+    if (res.status !== 200) {
+        return { error: `Unexpected Statuscode: ${res.status}`, userId: 0 }
+    }
+    const jsonData = await res.json();
+    return { error: jsonData["error"], userId: jsonData["user_id"] }
+}
